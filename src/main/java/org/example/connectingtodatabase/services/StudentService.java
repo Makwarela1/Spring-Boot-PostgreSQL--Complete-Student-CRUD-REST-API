@@ -19,7 +19,7 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    //CREATE
+
     @Transactional
     public StudentResponse createStudent(StudentRequest request) {
         if (studentRepository.existsByEmail(request.email())) {
@@ -36,20 +36,20 @@ public class StudentService {
         return mapToResponse(savedStudent);
     }
 
-    //READ ALL
+
     @Transactional(readOnly = true)
     public List<StudentResponse> getAllStudents() {
         return studentRepository.findAll().stream().map(this::mapToResponse).toList();
     }
 
-    //READ ONE
+
     @Transactional(readOnly = true)
     public StudentResponse getStudentById(Long id) {
         Students students = findStudentOrThrow(id);
         return mapToResponse(students);
     }
 
-    //UPDATE
+
     @Transactional
     public StudentResponse updateStudent(Long id, StudentRequest request) {
         Students students = findStudentOrThrow(id);
@@ -69,7 +69,7 @@ public class StudentService {
         return mapToResponse(updatedStudent);
     }
 
-    //DELETE
+
     @Transactional
     public void deleteStudent(Long id) {
         Students students = findStudentOrThrow(id);
