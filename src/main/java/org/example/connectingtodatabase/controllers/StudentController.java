@@ -43,7 +43,7 @@ public class StudentController {
     }
 
     //UPDATE
-    @PutMapping ("{id}")
+    @PutMapping ("/{id}")
     public ResponseEntity<StudentResponse> updateStudent(
             @PathVariable Long id,
             @Valid
@@ -52,7 +52,7 @@ public class StudentController {
     }
 
     //DELETE
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent (@PathVariable Long id){
         studentService.deleteStudent(id);
 

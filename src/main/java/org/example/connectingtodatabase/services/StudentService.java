@@ -1,5 +1,4 @@
 package org.example.connectingtodatabase.services;
-import com.sun.jdi.request.DuplicateRequestException;
 import org.example.connectingtodatabase.dto.StudentRequest;
 import org.example.connectingtodatabase.dto.StudentResponse;
 import org.example.connectingtodatabase.entity.Students;
@@ -7,6 +6,7 @@ import org.example.connectingtodatabase.exceptions.ResourceNotFoundException;
 import org.example.connectingtodatabase.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.example.connectingtodatabase.exceptions.DuplicateResourceException;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class StudentService {
     @Transactional
     public StudentResponse createStudent(StudentRequest request) {
         if (studentRepository.existsByEmail(request.email())) {
-            throw new DuplicateRequestException("A student with this email already exists");
+            throw new DuplicateResourceException("A student with this email already exists");
         }
 
         Students students = new Students();
@@ -46,7 +46,6 @@ public class StudentService {
     @Transactional(readOnly = true)
     public StudentResponse getStudentById(Long id) {
         Students students = findStudentOrThrow(id);
-
         return mapToResponse(students);
     }
 
@@ -58,7 +57,7 @@ public class StudentService {
         boolean emailUsedByAnotherStudent = studentRepository.existsByEmailAndIdNot(request.email(), id);
 
         if (emailUsedByAnotherStudent) {
-            throw new DuplicateRequestException("Another student is already using this email");
+            throw new DuplicateResourceException("Another student is already using this email");
         }
 
         students.setFirstName(request.firstName());
