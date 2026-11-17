@@ -3,6 +3,7 @@ import com.sun.jdi.request.DuplicateRequestException;
 import org.example.connectingtodatabase.dto.StudentRequest;
 import org.example.connectingtodatabase.dto.StudentResponse;
 import org.example.connectingtodatabase.entity.Students;
+import org.example.connectingtodatabase.exceptions.ResourceNotFoundException;
 import org.example.connectingtodatabase.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,7 @@ public class StudentService {
     //UPDATE
     @Transactional
     public StudentResponse updateStudent(Long id, StudentRequest request) {
-        Students students = findStudentsOrThrow(id);
+        Students students = findStudentOrThrow(id);
 
         boolean emailUsedByAnotherStudent = studentRepository.existsByEmailAndIdNot(request.email(), id);
 
