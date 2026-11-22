@@ -15,6 +15,8 @@ public record StudentRequest(
         @NotBlank(message = "Email is required")
         @Email(message = "Enter a valid email address")
         @Size(max = 255, message = "Email must not not exceed 250 characters")
-        String email
+        String email,
+
+        Long departmentId
 ){
 }
