@@ -17,10 +17,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleNotFound(
             ResourceNotFoundException exception) {
 
-        return buildErrorResponse(
-                HttpStatus.NOT_FOUND,
-                exception.getMessage()
-        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", exception.getMessage()));
     }
 
     @ExceptionHandler(DuplicateResourceException.class)
