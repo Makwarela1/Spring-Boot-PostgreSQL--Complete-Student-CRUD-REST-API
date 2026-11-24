@@ -3,7 +3,6 @@ package org.example.connectingtodatabase.controllers;
 import jakarta.validation.Valid;
 import org.example.connectingtodatabase.dto.StudentRequest;
 import org.example.connectingtodatabase.dto.StudentResponse;
-import org.example.connectingtodatabase.services.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
