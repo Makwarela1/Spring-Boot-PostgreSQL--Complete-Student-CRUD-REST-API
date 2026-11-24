@@ -23,6 +23,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         Department department = new Department(request.name(), request.description());
 
+        Department saved = repository.save(department);
+
         return  mapToResponse(saved);
     }
 
